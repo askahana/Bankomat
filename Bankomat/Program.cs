@@ -8,12 +8,14 @@
             Account user = new Account();
             int index = user.NameCheck();
             bool approved = user.PassCheck(index) && index != -1;
-            List<double> balance = new List<double>();
-            balance.Add(123.35);
-            balance.Add(0);
-            balance.Add(234.45);
-            balance.Add(2300);
-            balance.Add(3456);
+
+            double[][] balance = new double[5][];
+            balance [0] = new double []{1234.00, 1234.00 };
+            balance [1] = new double[] {234, 2345, 234 };
+            balance [2] = new double [] {123, 234 };
+            balance [3] = new double[] {45999, 56778, 3456 };
+            balance[4] = new double[] { 123, 234 };
+
             while (approved) 
             {
                 
@@ -25,16 +27,18 @@
                         Account.CheckBalance(balance, index);
                         break;
                     case 2:
+                        //Account.Transfer(balance, index);
                         break;
                     case 3:
-                        Account.CheckBalance(balance, index);
+                        //Account.Withdraw(balance, index);
                         break;
                     case 4:
                         Console.Clear();
-                        Console.WriteLine("Thanks for using.");
+                        Console.WriteLine("Välkommen åter!");
                         approved = false;
                         break;
                     default:
+                        Console.WriteLine("Ogiltigt val");
                         break;
                 }
             }
