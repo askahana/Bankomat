@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -58,7 +59,7 @@ namespace Bankomat
         public static void CheckBalance(double [][]balance, int index)
         {
             Console.Clear();
-            string[] accountNames = {"Lönekonto", "Sparkonto", "Aktiekonto" };
+            string[] accountNames = {"Lönekonto", "Sparkonto", "Aktiekonto", "Betalkonto", "Privatkonto" };
             for (int i = 0; i < balance[index].Length; i++)
             {
                 Console.WriteLine($"The balance of {accountNames[i]}: {balance[index][i]} kr");
@@ -68,31 +69,44 @@ namespace Bankomat
         }
         public static void Transfer (double[][] balance, int index)
         {
+            Console.Clear();
             Console.WriteLine("Vilket konto vill du överföra pengar från?");
-            Console.WriteLine("1. Lönekonto \n2. Sparkonto\n3. Aktiekonto\n4. Hobbikonto\n5. Reskonto");
+            string[] accountNames = {"1. Lönekonto", "2. Sparkonto", "3. Aktiekonto", "4. Betalkonto", "5. Privatkonto" };
+            for (int i = 0; i < balance[index].Length; i++)
+                Console.WriteLine(accountNames[i]);
             int x = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Vilket konto vill du lägga pengar till?");
             int y = Convert.ToInt32(Console.ReadLine());
             Console.Write("The amount of money: ");
             double money = Convert.ToDouble(Console.ReadLine());
-            balance[index][x-1] -= money;
-            balance[index][y-1] += money;
-
-            Console.WriteLine(balance[index][x - 1] + " kr" +
-               balance[index][y - 1] + "kr");
-            
+            if (balance[index][x - 1] < money) { 
+                Console.WriteLine("You cannot do this action. You do not have enough money.");
+                return;
+            }
+            else 
+            { 
+                balance[index][x-1] -= money;
+                balance[index][y-1] += money;
+            }
+            Console.WriteLine($"\n{accountNames[x-1]}: {balance[index][x-1]} kr");
+            Console.WriteLine($"{accountNames[y-1]}: {balance[index][y-1]} kr");
             Console.WriteLine("Klicka enter för att komma till huvudmenyn");
             Console.ReadKey();
         }
-        public static void Withdraw(List<double> a, int index)
+        public static void Withdraw(double[][] balance, int index)
         {
             Console.WriteLine("TA UT PENGAR");
+            Console.WriteLine("Vilket konto vill du ta ut pengar?");
+            string[] accountNames = { "1. Lönekonto", "2. Sparkonto", "3. Aktiekonto", "4. Betalkonto", "5. Privatkonto" };
+            for (int i = 0; i < balance[index].Length; i++)
+                Console.WriteLine(accountNames[i]);
+            int x = Convert.ToInt32(Console.ReadLine());
             Console.Write("Insert the amount: ");
             double money = Convert.ToDouble(Console.ReadLine());
-            if (a[index] < money)
+            if (balance[index][x - 1] < money)
                 Console.WriteLine("You cannot do this action. You do not have enough money.");    
             else
-                a[index] -= money;
+                balance[index][x - 1] -= money;
             Console.WriteLine("Klicka enter för att komma till huvudmenyn");
             Console.ReadKey();
         }

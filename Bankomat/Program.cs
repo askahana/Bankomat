@@ -18,7 +18,6 @@
 
             while (approved) 
             {
-                
                 Account.Menu();
                 int menuChoice = Convert.ToInt32(Console.ReadLine());
                 switch (menuChoice)
@@ -27,10 +26,10 @@
                         Account.CheckBalance(balance, index);
                         break;
                     case 2:
-                        //Account.Transfer(balance, index);
+                        Account.Transfer(balance, index);
                         break;
                     case 3:
-                        //Account.Withdraw(balance, index);
+                        Account.Withdraw(balance, index);
                         break;
                     case 4:
                         Console.Clear();
