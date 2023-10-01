@@ -36,7 +36,7 @@ namespace Bankomat
                 if (passWords[index] == inputPass)
                 {
                     Console.Clear();
-                    Console.WriteLine("Välkommen till SutBanken!\nTryck enter.");
+                    Console.WriteLine("Succeeded");
                     Console.ReadKey();
                     return true;
                 }
@@ -54,7 +54,7 @@ namespace Bankomat
             string menu2 = "2. Överföring mellan konton";
             string menu3 = "3. Ta ut pengar";
             string menu4 = "4. Logga ut";
-            Console.WriteLine(menu1 + "\n" + menu2 + "\n" + menu3 + "\n" + menu4);
+            Console.WriteLine("\n\t"+menu1 + "\n\t" + menu2 + "\n\t" + menu3 + "\n\t" + menu4);
         }
         public static void CheckBalance(double [][]balance, int index)
         {
@@ -93,8 +93,9 @@ namespace Bankomat
             Console.WriteLine("Klicka enter för att komma till huvudmenyn");
             Console.ReadKey();
         }
-        public static void Withdraw(double[][] balance, int index)
+        public void Withdraw(double[][] balance, int index)
         {
+            Console.Clear();
             Console.WriteLine("TA UT PENGAR");
             Console.WriteLine("Vilket konto vill du ta ut pengar?");
             string[] accountNames = { "1. Lönekonto", "2. Sparkonto", "3. Aktiekonto", "4. Betalkonto", "5. Privatkonto" };
@@ -103,11 +104,22 @@ namespace Bankomat
             int x = Convert.ToInt32(Console.ReadLine());
             Console.Write("Insert the amount: ");
             double money = Convert.ToDouble(Console.ReadLine());
-            if (balance[index][x - 1] < money)
-                Console.WriteLine("You cannot do this action. You do not have enough money.");    
-            else
-                balance[index][x - 1] -= money;
-            Console.WriteLine("Klicka enter för att komma till huvudmenyn");
+            bool approved = PassCheck(index);
+            while (approved) {
+                Console.ReadKey();
+                if (balance[index][x - 1] < money)
+                {
+                    Console.WriteLine("You cannot do this action. You do not have enough money.");
+                    return;
+                }
+                else
+                {
+                    balance[index][x - 1] -= money;
+                    Console.WriteLine($"\n{accountNames[x - 1]}: {balance[index][x - 1]} kr");
+                    approved = false;
+                }   
+            }
+            Console.WriteLine("\nKlicka enter för att komma till huvudmenyn");
             Console.ReadKey();
         }
 

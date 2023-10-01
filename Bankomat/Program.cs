@@ -29,7 +29,7 @@
                         Account.Transfer(balance, index);
                         break;
                     case 3:
-                        Account.Withdraw(balance, index);
+                        user.Withdraw(balance, index);
                         break;
                     case 4:
                         Console.Clear();
