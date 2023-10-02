@@ -12,6 +12,7 @@ namespace Bankomat
     {
         private string[] UserNames = { "AYA", "AKI", "TOBIAS", "MUSSEPIG", "OLLE" };
         private int[] PassWords = { 1103, 1221, 2345, 3456, 0901 };
+        private string[] AccountNames= { "Lönekonto", "Sparkonto", "Aktiekonto", "Betalkonto", "Privatkonto" };
         //double[][] balance = new double[5][];
         //   balance[0] = new double[] { 1234.00, 1234.00 };
         //   balance[1] = new double[] { 234, 2345, 234 };
@@ -20,33 +21,43 @@ namespace Bankomat
         //   balance[4] = new double[] { 123, 234 };
         public int CheckName()
         {
+            
             int index = 0;
             Console.Write("Ange ditt namn: ");
-            string inputName = Console.ReadLine();
-            for (int i = 0; i < UserNames.Length; i++)
-            {
-                if (UserNames[i] == inputName.ToUpper())
+           
+                string inputName = Console.ReadLine();
+                for (int i = 0; i < UserNames.Length; i++)
                 {
-                    index = i;  
-                    return index;
+                    if (UserNames[i] == inputName.ToUpper())
+                    {
+                        index = i;
+                        return index;
+                    }
                 }
-            }
             return -1;
         }
         public bool CheckPass(int index)
         {
-            for (int i = 0; i < 3; i++) 
+            for (int i = 0; i < 3; i++)
             {
-                Console.Write("Ange pin-kod: ");
-                int inputPass = Convert.ToInt32(Console.ReadLine());
-                if (PassWords[index] == inputPass)
+                Console.Write("Ange password: "); 
+                try { 
+                    int inputPass = Convert.ToInt32(Console.ReadLine());
+                    if (PassWords[index] == inputPass)
+                    {
+                        return true;
+                    }
+                    else
+                        Console.WriteLine("Password is not correct.");
+                    }
+                catch(Exception)
                 {
-                    return true;
+                    Console.WriteLine ("Antigen är användarnamn inte korrekt, eller så angav du inte siffror.\nVänligen försök igen.");
+                    CheckName();
                 }
-                else
-                    Console.WriteLine("Password is not correct.");
-            }
-            Console.WriteLine("You tried 3 times. Please try again after 3 minutes.\n Either username or password is not correct.");
+            }   
+            Console.WriteLine("You tried 3 times. Please try again after 3 minutes.");
+            Console.ReadKey();
             return false;   
         }
         public static void Menu()
@@ -59,16 +70,14 @@ namespace Bankomat
             string menu4 = "4. Logga ut";
             Console.WriteLine("\n\t"+menu1 + "\n\t" + menu2 + "\n\t" + menu3 + "\n\t" + menu4);
         }
-        public static void CheckBalance(double [][]balance, int index)
+        public void CheckBalance(double [][]balance, int index)
         {
             Console.Clear();
             Console.WriteLine("--------Dina konto hos oss--------");
-            string[] accountNames = {"Lönekonto", "Sparkonto", "Aktiekonto", "Betalkonto", "Privatkonto" };
-            for (int i = 0; i < balance[index].Length; i++)
-            {
-                Console.WriteLine($"The balance of {accountNames[i]}: {balance[index][i]} kr");
+            for (int i = 0; i < balance[index].Length; i++) {
+                Console.WriteLine( $"Saldo på {AccountNames[i]} : {balance[index][i]} kr");
             }
-            
+            Console.WriteLine("Klicka enter för att komma till huvudmenyn");
             Console.ReadKey();
         }
         public static void Transfer (double[][] balance, int index)
@@ -82,7 +91,7 @@ namespace Bankomat
             int x = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Vilket konto vill du lägga pengar till?");
             int y = Convert.ToInt32(Console.ReadLine());
-            Console.Write("The amount of money: ");
+            Console.Write("Summa: ");
             double money = Convert.ToDouble(Console.ReadLine());
             if (balance[index][x - 1] < money) { 
                 Console.WriteLine("You cannot do this action. You do not have enough money.");
@@ -93,6 +102,9 @@ namespace Bankomat
                 balance[index][x-1] -= money;
                 balance[index][y-1] += money;
             }
+            Console.Clear();
+            Console.ReadKey();
+            Console.WriteLine("--------Nuvarande saldo--------");
             Console.WriteLine($"\n{accountNames[x-1]}: {balance[index][x-1]} kr");
             Console.WriteLine($"{accountNames[y-1]}: {balance[index][y-1]} kr");
             Console.WriteLine("Klicka enter för att komma till huvudmenyn");
@@ -127,6 +139,5 @@ namespace Bankomat
             Console.WriteLine("\nKlicka enter för att komma till huvudmenyn");
             Console.ReadKey();
         }
-
     }
 }
