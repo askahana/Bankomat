@@ -10,15 +10,22 @@ namespace Bankomat
 {
     public class Account
     {
-        public int NameCheck()
+        private string[] UserNames = { "AYA", "AKI", "TOBIAS", "MUSSEPIG", "OLLE" };
+        private int[] PassWords = { 1103, 1221, 2345, 3456, 0901 };
+        //double[][] balance = new double[5][];
+        //   balance[0] = new double[] { 1234.00, 1234.00 };
+        //   balance[1] = new double[] { 234, 2345, 234 };
+        //   balance[2] = new double[] { 123, 234 };
+        //   balance[3] = new double[] { 45999, 56778, 3456 };
+        //   balance[4] = new double[] { 123, 234 };
+        public int CheckName()
         {
-            string[] userNames = { "AYA", "AKI", "TOBIAS", "MUSSEPIG", "DONALD" };
             int index = 0;
             Console.Write("Ange ditt namn: ");
             string inputName = Console.ReadLine();
-            for (int i = 0; i < userNames.Length; i++)
+            for (int i = 0; i < UserNames.Length; i++)
             {
-                if (userNames[i] == inputName.ToUpper())
+                if (UserNames[i] == inputName.ToUpper())
                 {
                     index = i;  
                     return index;
@@ -26,18 +33,14 @@ namespace Bankomat
             }
             return -1;
         }
-        public bool PassCheck(int index)
+        public bool CheckPass(int index)
         {
-            int[] passWords = { 1234, 1221, 2345, 3456, 4567 };
             for (int i = 0; i < 3; i++) 
             {
                 Console.Write("Ange pin-kod: ");
                 int inputPass = Convert.ToInt32(Console.ReadLine());
-                if (passWords[index] == inputPass)
+                if (PassWords[index] == inputPass)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Succeeded");
-                    Console.ReadKey();
                     return true;
                 }
                 else
@@ -49,7 +52,7 @@ namespace Bankomat
         public static void Menu()
         {
             Console.Clear();
-            Console.WriteLine("What can I help you today?");
+            Console.WriteLine("Vad vill du göra?");
             string menu1 = "1. Se dina konton och saldo";
             string menu2 = "2. Överföring mellan konton";
             string menu3 = "3. Ta ut pengar";
@@ -59,6 +62,7 @@ namespace Bankomat
         public static void CheckBalance(double [][]balance, int index)
         {
             Console.Clear();
+            Console.WriteLine("--------Dina konto hos oss--------");
             string[] accountNames = {"Lönekonto", "Sparkonto", "Aktiekonto", "Betalkonto", "Privatkonto" };
             for (int i = 0; i < balance[index].Length; i++)
             {
@@ -70,6 +74,7 @@ namespace Bankomat
         public static void Transfer (double[][] balance, int index)
         {
             Console.Clear();
+            Console.WriteLine("--------Överföra pengar--------");
             Console.WriteLine("Vilket konto vill du överföra pengar från?");
             string[] accountNames = {"1. Lönekonto", "2. Sparkonto", "3. Aktiekonto", "4. Betalkonto", "5. Privatkonto" };
             for (int i = 0; i < balance[index].Length; i++)
@@ -96,7 +101,7 @@ namespace Bankomat
         public void Withdraw(double[][] balance, int index)
         {
             Console.Clear();
-            Console.WriteLine("TA UT PENGAR");
+            Console.WriteLine("--------TA UT PENGAR--------");
             Console.WriteLine("Vilket konto vill du ta ut pengar?");
             string[] accountNames = { "1. Lönekonto", "2. Sparkonto", "3. Aktiekonto", "4. Betalkonto", "5. Privatkonto" };
             for (int i = 0; i < balance[index].Length; i++)
@@ -104,7 +109,7 @@ namespace Bankomat
             int x = Convert.ToInt32(Console.ReadLine());
             Console.Write("Insert the amount: ");
             double money = Convert.ToDouble(Console.ReadLine());
-            bool approved = PassCheck(index);
+            bool approved = CheckPass(index);
             while (approved) {
                 Console.ReadKey();
                 if (balance[index][x - 1] < money)

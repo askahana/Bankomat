@@ -15,8 +15,8 @@
             while (isWorking) { 
                 Console.WriteLine("Välkommen till banken!");
                 Account user = new Account();
-                int index = user.NameCheck();
-                bool approved = user.PassCheck(index) && index != -1;
+                int index = user.CheckName();
+                bool approved = user.CheckPass(index) && index != -1;
 
             while (approved) 
             {
