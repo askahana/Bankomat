@@ -39,13 +39,15 @@
                             approved = false;
                             break;
                         default:
-                            Console.WriteLine("Ogiltigt val");
+                                Console.WriteLine("Ogiltigt val");
+                                Console.ReadLine();
                             break;
                     }
                     }
                     catch (Exception)
                     {
                         Console.WriteLine("ERROR!!! Ange ett tal.");
+                        Console.ReadKey();
                     }
             }
             }
