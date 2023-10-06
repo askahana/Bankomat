@@ -4,13 +4,6 @@
     {
         static void Main(string[] args)
         {
-            //double[][] balance = new double[5][];
-            //balance[0] = new double[] { 1234.00, 1234.00 };
-            //balance[1] = new double[] { 234.00, 2345.00, 234.00 };
-            //balance[2] = new double[] { 123.00, 234.00 };
-            //balance[3] = new double[] { 45999.00, 56778.00, 3456.00 };
-            //balance[4] = new double[] { 123.00, 234.00 };
-
             bool isWorking = true;
             while (isWorking) 
             {

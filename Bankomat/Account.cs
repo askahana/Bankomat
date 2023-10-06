@@ -47,26 +47,23 @@ namespace Bankomat
             }
                 for (int i = 0; i < 3; i++)
                 {
-                Console.Write("Ange password: ");
+                Console.Write("Ange pin-kod: ");
                 try { 
                     int inputPass = Convert.ToInt32(Console.ReadLine());
-                
                     if (PassWords[index] == inputPass)
                         return true;
                     else
-                        Console.WriteLine("Password is not correct.");
+                        Console.WriteLine("Felaktig pin-kod. Vänligen försök igen.");
                     }
                     catch (Exception e)
                     {
-                    Console.WriteLine("Fel pin-kod! Vänligen försök igen.");
+                    Console.WriteLine("Felaktig pin-kod! Ange siffror.");
                     }
                 }
-
-            Console.WriteLine("You tried 3 times. Please try again after 3 minutes.");
+            Console.WriteLine("You tried 3 times. Please try again later after 3 minutes.");
             Thread.Sleep(1000*60*3);
             return false;
         }
-    
         public static void Menu()
         {
             Console.Clear();
@@ -103,7 +100,7 @@ namespace Bankomat
             Console.WriteLine("--------Överföra pengar--------");
             Console.WriteLine("Vilket konto vill du överföra pengar från?");
             for (int i = 0; i < Balance[index].Length; i++)
-                Console.WriteLine((i+1) + ". " + AccountNames[i]);
+                Console.WriteLine((i+1) + ". " + AccountNames[i]+ ": " + Balance[index][i] + " kr");
             int x = Convert.ToInt32(Console.ReadLine());
             //if (XisNotValid(x, index))
                 if (x <= 0 || x > Balance[index].Length)
@@ -124,7 +121,8 @@ namespace Bankomat
             Console.Write("Summa: ");
             decimal money = Convert.ToDecimal(Console.ReadLine());
             if (Balance[index][x - 1] < money) { 
-                Console.WriteLine("You cannot do this action. You do not have enough money.");
+                Console.WriteLine("Beloppet är för stort. Vänligen försök igen.");
+                Console.ReadKey();
                 return;
             }
             else 
@@ -133,7 +131,6 @@ namespace Bankomat
                 Balance[index][y-1] += money;
             }
             Console.Clear();
-            Console.ReadKey();
             Console.WriteLine("--------Nuvarande saldo--------");
             Console.WriteLine($"\n{AccountNames[x-1]}: {Balance[index][x-1]} kr");
             Console.WriteLine($"{AccountNames[y-1]}: {Balance[index][y-1]} kr");
@@ -146,7 +143,7 @@ namespace Bankomat
             Console.WriteLine("--------TA UT PENGAR--------");
             Console.WriteLine("Vilket konto vill du ta ut pengar?");
             for (int i = 0; i < Balance[index].Length; i++)
-                Console.WriteLine((i+1) + ". " + AccountNames[i]);
+                Console.WriteLine((i+1) + ". " + AccountNames[i]+ ":  "+Balance[index][i]+" kr");
             int x = Convert.ToInt32(Console.ReadLine());
             //if (XisNotValid(x, index)) 
             //    return;
@@ -156,20 +153,20 @@ namespace Bankomat
                 Console.ReadKey();
                 return;
             }
-            Console.Write("Insert the amount: ");
+            Console.Write("Mata in summan: ");
             decimal money = Convert.ToDecimal(Console.ReadLine());
             bool approved = CheckPass(index);
             while (approved) {
-                Console.ReadKey();
                 if (Balance[index][x - 1] < money)
                 {
-                    Console.WriteLine("You cannot do this action. You do not have enough money.");
+                    Console.WriteLine("Beloppet är för stort. Vänligen försök igen.");
+                    Console.ReadKey();
                     return;
                 }
                 else
                 {
                     Balance[index][x - 1] -= money;
-                    Console.WriteLine($"\n{AccountNames[x - 1]}: {Balance[index][x - 1]} kr");
+                    Console.WriteLine($"\nNuvarande saldo: {AccountNames[x - 1]}: {Balance[index][x - 1]} kr");
                     approved = false;
                 }   
             }
@@ -178,6 +175,7 @@ namespace Bankomat
         }
         public void Deposit(int index)
         {
+            Console.Clear();
             Console.WriteLine("--------SÄTTA IN PENGAR--------");
             Console.WriteLine("Vilket konto vill du sätta in pengar?");
             for (int i = 0; i < Balance[index].Length; i++)
@@ -189,7 +187,7 @@ namespace Bankomat
                 Console.ReadKey();
                 return;
             }
-            Console.Write("Insert the amount: ");
+            Console.Write("Mata in summan: ");
             decimal money = Convert.ToDecimal(Console.ReadLine());
             bool approved = CheckPass(index);
             while (approved)
@@ -204,9 +202,10 @@ namespace Bankomat
         public void Farewell()
         {
             Console.Clear();
-            Console.WriteLine("Välkommen åter!");
-            Console.ReadKey();
+            Console.WriteLine("Tack för besöket. Välkommen åter!\nDu kommer nu tas tillbaka till inloggningsskärmen.");
+            Thread.Sleep(4000);
+            Console.Clear();
+            Thread.Sleep(1000);
         }
-
     }
 }
