@@ -12,7 +12,7 @@ namespace Bankomat
     {
         private string[] UserNames = { "AYA", "AKI", "TOBIAS", "MUSSEPIG", "OLLE" };
         private int[] PassWords = { 1103, 1221, 2345, 3456, 0901 };
-        private string[] AccountNames= { "Lönekonto", "Sparkonto", "Aktiekonto", "Betalkonto", "Privatkonto" };
+        private string[] AccountNames = { "Lönekonto", "Sparkonto", "Aktiekonto", "Betalkonto", "Privatkonto" };
         private decimal[][] Balance = new decimal[5][] 
         {
         new decimal[] { 12340, 1234 },
@@ -89,10 +89,11 @@ namespace Bankomat
         {
             if (x <= 0 || x > Balance[index].Length)
             {
-                Console.WriteLine($"Ange ett tal mellan 1 till {Balance[index].Length}");
+                Console.WriteLine($"Ange ett tal mellan 1 till {Balance[index].Length}. \nKlicka enter för att komma till huvudmenyn.");
                 Console.ReadKey();
+                return true;
             }
-            return true;
+            return false;
         }
         public void Transfer (int index)
         {
@@ -102,22 +103,12 @@ namespace Bankomat
             for (int i = 0; i < Balance[index].Length; i++)
                 Console.WriteLine((i+1) + ". " + AccountNames[i]+ ": " + Balance[index][i] + " kr");
             int x = Convert.ToInt32(Console.ReadLine());
-            //if (XisNotValid(x, index))
-                if (x <= 0 || x > Balance[index].Length)
-                {
-                    Console.WriteLine($"Ange ett tal mellan 1 till {Balance[index].Length}");
-                    Console.ReadKey();
-                    return;
-                }
+            if (XisNotValid(x, index) == true)
+                return;
             Console.WriteLine("Vilket konto vill du lägga pengar till?");
             int y = Convert.ToInt32(Console.ReadLine());
-            //if (XisNotValid(y, index))
-            if (y <= 0 || y > Balance[index].Length)
-            {
-                Console.WriteLine($"Ange ett tal mellan 1 till {Balance[index].Length}");
-                Console.ReadKey();
+            if (XisNotValid(y, index)==true)
                 return;
-            }
             Console.Write("Summa: ");
             decimal money = Convert.ToDecimal(Console.ReadLine());
             if (Balance[index][x - 1] < money) { 
@@ -145,14 +136,8 @@ namespace Bankomat
             for (int i = 0; i < Balance[index].Length; i++)
                 Console.WriteLine((i+1) + ". " + AccountNames[i]+ ":  "+Balance[index][i]+" kr");
             int x = Convert.ToInt32(Console.ReadLine());
-            //if (XisNotValid(x, index)) 
-            //    return;
-            if (x <= 0 || x > Balance[index].Length)
-            {
-                Console.WriteLine($"Ange ett tal mellan 1 till {Balance[index].Length}");
-                Console.ReadKey();
+            if (XisNotValid(x, index)==true)
                 return;
-            }
             Console.Write("Mata in summan: ");
             decimal money = Convert.ToDecimal(Console.ReadLine());
             bool approved = CheckPass(index);
@@ -181,19 +166,15 @@ namespace Bankomat
             for (int i = 0; i < Balance[index].Length; i++)
                 Console.WriteLine((i + 1) + ". " + AccountNames[i]);
             int x = Convert.ToInt32(Console.ReadLine());
-            if (x <= 0 || x > Balance[index].Length)
-            {
-                Console.WriteLine($"Ange ett tal mellan 1 till {Balance[index].Length}");
-                Console.ReadKey();
+            if (XisNotValid(x, index) == true)
                 return;
-            }
             Console.Write("Mata in summan: ");
             decimal money = Convert.ToDecimal(Console.ReadLine());
             bool approved = CheckPass(index);
             while (approved)
             {
                     Balance[index][x - 1] += money;
-                    Console.WriteLine($"\n{AccountNames[x - 1]}: {Balance[index][x - 1]} kr");
+                    Console.WriteLine($"\nNuvarande saldo: {AccountNames[x - 1]}: {Balance[index][x - 1]} kr");
                     approved = false;
             }
             Console.WriteLine("\nKlicka enter för att komma till huvudmenyn");

@@ -12,7 +12,6 @@
                 Account user = new Account();
                 int index = user.CheckName();
                 bool approved = user.CheckPass(index) && index != -1;
-
             while (approved) 
             {
                 Account.Menu();
@@ -38,7 +37,7 @@
                             break;
                         default:
                                 Console.WriteLine("Ogiltigt val");
-                                Console.ReadLine();
+                                Console.ReadKey();
                             break;
                     }
                     }
