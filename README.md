@@ -30,6 +30,7 @@ In this way you can know which index number each user has and it works with pass
 ![CheckIndex](https://github.com/askahana/Bankomat/assets/144675449/c8432af8-44e5-4f5c-b2e4-98ef76712433)
 
 Where and how to store users’ information was the part which I needed to think about most. If I should use Array or ListArray, if I should store information in Main()-method or in each method/function, and I made several tries. 
+
 The first idea was to make a class for the log-in System.
 ![ClassProperty](https://github.com/askahana/Bankomat/assets/144675449/554551f6-b276-4f3a-a772-d931ebf1e1fd)
 
@@ -43,7 +44,9 @@ But I could not make it. So I stored all information in the Main()-method at fir
 As you can see above, jagged array was used to store balance so that each user can have different numbers of accounts. I first used ArrayList because I misunderstood that users needed to be able to transfer money to each other.
 
 ## Reflection
-After making the project and trying to do extra tasks, I noticed I should have used ListArray to be able to register new users and more accounts, or I should have used Array.Resize. But I did not know how to handle Jaggaed Array in that case. So I need to deepen my knowledge about this.
+After making the project and trying to do extra tasks, I noticed I should have used ListArray to be able to register new users and more accounts and transfer money to each other, or I should have used Array.Resize to make Array bigger. But I did not know how to handle Jaggaed Array in those cases. So I need to deepen my knowledge about this. Also I am wondering if I should have declare user's information in the constructor or in the field as I did.
+
+I think there are several ways to make this project. So next time, I would like to make project as my first plan, using constructors and try extra tasks.
 
 Also I used a variable decimal for currency, but I am wondering what I should do with öre.
 
