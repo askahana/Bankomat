@@ -20,25 +20,29 @@ Users can
 
 ## planning and implementation
 
-This program is written in C#, and it consists of 2 classes and 9 methods. 
+This program is written in C#, and it consists of 2 classes and 11 methods. 
 
 I planned the program by dividing it into two parts, log-in system part and other function parts. 
 As I could not come up with good solutions for the log-in system part, I started with the other function part. 
-For function parts, such as withdrawing money and transferring money, the switch-statement was used and I wrote codes in the same order as the switch statement.
+For function parts, such as withdrawing money and transferring money, the switch-statement was used and I made methods and wrote codes in the same order as the switch statement.
 
 For log-in part, I used for-loop and Array. If the username which the user input is the same as one of the usernames in the Array, the index number will be assigned to the index. 
 In this way you can know which index number each user has and it works with password and accounts also. So say the user’s index is 0, and you can access their account by this index number.
+![CheckIndex](https://github.com/askahana/Bankomat/assets/144675449/c8432af8-44e5-4f5c-b2e4-98ef76712433)
 
-Where and how to store users’ information was the part which I needed to think about most. 
-If I should use Array or ListArray or declar in the class, if I should store information in Main()-method or in each method/ function under class, Account, and I made several tries. For example, I used ArrayList first instead of Array for users' balance because I misunderstood that users needed to be able to transfer money to each other. Then I noticed users need several accounts and used a jagged array instead. 
-
-All users' information was stored in the Main()-method at first. But once the log-in system worked, I made a class, Account, and moved username Array to CheckName()-method, passwords Array to CheckPass()-method. Like this I made Arrays in each method at first, but to avoid it I tried if I can initiate Arrays under class fields and did it.
+Where and how to store users’ information was the part which I needed to think about most. If I should use Array or ListArray, if I should store information in Main()-method or in each method/ function, and I made several tries. 
+The first idea was to make class for log-in System.
+![ClassProperty](https://github.com/askahana/Bankomat/assets/144675449/554551f6-b276-4f3a-a772-d931ebf1e1fd)
+And then you can use them like this.
+![Challenge1](https://github.com/askahana/Bankomat/assets/144675449/2aa53281-3c16-49a8-9da0-d7176e36f60f)
+But I could not make it. So I tried to store all information in the Main()-method, and then moved them to class, Account. At first all information was stored under each method. But I initiate Arrays under class fields to avoid repetition.
+![Arrays](https://github.com/askahana/Bankomat/assets/144675449/369df15b-a485-4183-a199-4d9a83b7420b)
 
 ## Reflection
-After making the project and trying to do extra tasks, I noticed I should have used ListArray to be able to register new users and more accounts. However, I could not change a jagged array to ListArray. Because  I wanted to try making class, I did it but I still am unsure with this. So I need to study more about this.
+After making the project and trying to do extra tasks, I noticed I should have used ListArray to be able to register new users and more accounts. However, I could not come up with solutions to make more accounts for new user. I guess I need to use ListArray for Jagged Array somehow. So I need to deepen knowlege about this.
 
 Also I used a variable decimal for currency, but I am wondering what I should do with öre.
 
-
+'
 ### Authour
 * Asuka Hanada
