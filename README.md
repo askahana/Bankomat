@@ -33,8 +33,10 @@ In this way you can know which index number each user has and it works with pass
 Where and how to store users’ information was the part which I needed to think about most. If I should use Array or ListArray, if I should store information in Main()-method or in each method/ function, and I made several tries. 
 The first idea was to make class for log-in System.
 ![ClassProperty](https://github.com/askahana/Bankomat/assets/144675449/554551f6-b276-4f3a-a772-d931ebf1e1fd)
+
 And then you can use them like this.
 ![Challenge1](https://github.com/askahana/Bankomat/assets/144675449/2aa53281-3c16-49a8-9da0-d7176e36f60f)
+
 But I could not make it. So I tried to store all information in the Main()-method, and then moved them to class, Account. At first all information was stored under each method. But I initiate Arrays under class fields to avoid repetition.
 ![Arrays](https://github.com/askahana/Bankomat/assets/144675449/369df15b-a485-4183-a199-4d9a83b7420b)
 
