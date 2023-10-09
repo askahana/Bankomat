@@ -27,6 +27,7 @@ As I could not come up with good solutions for the log-in system part at first, 
 
 For log-in part, I used for-loop and Array. If the username, which the user input, is the same as one of the usernames in the ArrayList, the index number will be assigned to the index. 
 In this way you can know which index number each user has and it works with password and accounts also. So say the user’s index is 0, and you can access their account by this index number. 
+
 ![CheckIndex](https://github.com/askahana/Bankomat/assets/144675449/c8432af8-44e5-4f5c-b2e4-98ef76712433)
 
 Where and how to store users’ information was the part which I needed to think about most. If I should use Array or ListArray, if I should store information in Main()-method or in each method/function, and I made several tries. 
