@@ -10,14 +10,14 @@ namespace Bankomat
 {
     public class Account
     {
-        private List<string> UserNames = new List<string> { "AYA", "AKI", "TOBIAS", "MUSSEPIG", "OLLE" };
-        private List<int> PassWords = new List<int> { 1103, 1221, 2345, 3456, 0901 };
+        private string [] UserNames = { "AYA", "AKI", "TOBIAS", "MUSSEPIG", "OLLE" };
+        private int [] PassWords = { 1103, 1221, 1234, 3456, 0901 };
         private string[] AccountNames = { "Lönekonto", "Sparkonto", "Aktiekonto", "Betalkonto", "Privatkonto" };
         private decimal[][] Balance = new decimal[5][]
         {
         new decimal[] { 12340, 1234, 23456, 45677 },
-        new decimal[] { 234, 2345, 234, 34567 },
-        new decimal[] { 123, 234 },
+        new decimal[] { 234, 2345, 234 },
+        new decimal[] { 123 , 2345},
         new decimal[] { 45999, 56778, 3456 },
         new decimal[] { 123, 234, 34567 }
         };
@@ -26,7 +26,7 @@ namespace Bankomat
             int index = 0;                                  // För att kunna veta vilket index-nummer användare har.
             Console.Write("Ange ditt namn: ");
             string inputName = Console.ReadLine();          // Användare matar in användarnamn.
-            for (int i = 0; i < UserNames.Count; i++)
+            for (int i = 0; i < UserNames.Length; i++)
             {
                 if (UserNames[i] == inputName.ToUpper())
                 {
@@ -75,7 +75,7 @@ namespace Bankomat
             string menu5 = "5. Logga ut";
             Console.WriteLine("\n\t" + menu1 + "\n\t" + menu2 + "\n\t" + menu3 + "\n\t" + menu4 + "\n\t" + menu5);
         }
-        public void CheckBalance(int index)         // Här kan användare se saldo.
+        public void CheckBalance(int index)         // Metod för att visa saldo.
         {
             Console.Clear();
             Console.WriteLine("--------Saldo--------");
@@ -147,9 +147,9 @@ namespace Bankomat
                 return;
             Console.Write("Mata in summan: ");
             decimal money = Convert.ToDecimal(Console.ReadLine());
-            bool approved = CheckPass(index);       // kontrollerar pinkod.
+            bool approved = CheckPass(index);       // kontrollerar pinkod. // Om pinkod stämmer kan användaren ta ut pengar.
             while (approved)
-            {                      // Om pinkod stämmer kan användaren ta ut pengar.
+            {                      
                 if (BalanceIsTooHigh(index, money, x))
                     return;
                 else
@@ -173,8 +173,8 @@ namespace Bankomat
                 return;
             Console.Write("Mata in summan: ");
             decimal money = Convert.ToDecimal(Console.ReadLine());
-            bool approved = CheckPass(index);
-            while (approved)
+            bool approved = CheckPass(index);       // Kontrollerar pin-kod för att kunna förtsätta.
+            while (approved)                        // Om pinkod stämmer kan användaren sätta in pengar.
             {
                 Balance[index][x - 1] += money;     // Addera summan till x-1 konto.
                 Console.WriteLine($"\nNuvarande saldo: {AccountNames[x - 1]}: {Balance[index][x - 1]} kr");

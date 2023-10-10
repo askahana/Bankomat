@@ -10,7 +10,7 @@
                 Console.Clear();
                 Console.WriteLine("Välkommen till Banken!");
                 Account user = new Account();
-                int index = user.CheckNameAndIndex();              // Användarens index-nummer.
+                int index = user.CheckNameAndIndex();      // Användarens index-nummer.
                 bool approved = user.CheckPass(index);    // Om pinkod stämmer.
                 while (approved)
                 {
