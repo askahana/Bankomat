@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -10,60 +11,15 @@ namespace Bankomat
 {
     public class Account
     {
-        private string [] UserNames = { "AYA", "AKI", "TOBIAS", "MUSSEPIG", "OLLE" };
-        private int [] PassWords = { 1103, 1221, 1234, 3456, 0901 };
         private string[] AccountNames = { "Lönekonto", "Sparkonto", "Aktiekonto", "Betalkonto", "Privatkonto" };
         private decimal[][] Balance = new decimal[5][]
         {
-        new decimal[] { 12340, 1234, 23456, 45677 },
-        new decimal[] { 234, 2345, 234 },
-        new decimal[] { 123 , 2345},
-        new decimal[] { 45999, 56778, 3456 },
-        new decimal[] { 123, 234, 34567 }
+        new decimal[] { 12340m, 1234m, 23456.45m, 45677m },
+        new decimal[] { 234m, 2345m, 234m },
+        new decimal[] { 123m , 2345m},
+        new decimal[] { 45999m, 56778m, 3456m },
+        new decimal[] { 123m, 234m, 34567m }
         };
-        public int CheckNameAndIndex()                  
-        {
-            int index = 0;                                  // För att kunna veta vilket index-nummer användare har.
-            Console.Write("Ange ditt namn: ");
-            string inputName = Console.ReadLine();          // Användare matar in användarnamn.
-            for (int i = 0; i < UserNames.Length; i++)
-            {
-                if (UserNames[i] == inputName.ToUpper())
-                {
-                    index = i;                              // Om användarnamn finns i Array, returneras index.
-                    return index;
-                }
-            }
-            return -1;                                      // Om användarens inmatning och namnen i Array är inte samma,
-        }                                                   // returneras -1.
-        public bool CheckPass(int index)        // Kontrollera pin-kod.
-        {
-            if (index == -1)                    // Om användarnamn inte stämmer, får användaren inte skriva pin-koden.
-            {
-                Console.WriteLine("Fel användarnamn. Försök igen.");
-                Console.ReadKey();
-                return false;
-            }
-            for (int i = 0; i < 3; i++)     // Användaren får skriva pinkod max 3 gånger.
-            {
-                Console.Write("Ange pin-kod: ");
-                try
-                {
-                    int inputPass = Convert.ToInt32(Console.ReadLine());        // Användare matar in pinkod.
-                    if (PassWords[index] == inputPass)
-                        return true;
-                    else
-                        Console.WriteLine("Felaktig pin-kod. Vänligen försök igen.");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Felaktig pin-kod! Ange siffror.");
-                }
-            }
-            Console.WriteLine("Du har försökt 3 gånger. Vänligen vänta 3 minuter.");
-            Thread.Sleep(1000 * 60 * 3);         // Om användaren skriver in fel pinkod tre gånger, måste anävndaren
-            return false;                        // vänta 3 minuter.
-        }
         public static void Menu()
         {
             Console.Clear();
@@ -74,6 +30,55 @@ namespace Bankomat
             string menu4 = "4. Sätta in pengar";
             string menu5 = "5. Logga ut";
             Console.WriteLine("\n\t" + menu1 + "\n\t" + menu2 + "\n\t" + menu3 + "\n\t" + menu4 + "\n\t" + menu5);
+        }
+        public void MenuChoice()
+        {
+            bool isWorking = true;
+            while (isWorking)
+            {
+                Console.Clear();
+                Console.WriteLine("Välkommen till Banken!");
+                LogIn login = new LogIn();
+                int index = login.CheckNameAndIndex();      // Användarens index-nummer.
+                bool approved = login.CheckPass(index);    // Inlogning. Om pinkod stämmer. 
+                Account user = new Account();
+                while (approved)
+                {
+                    Account.Menu();
+                    try      // Om användaren matar in annat än siffra, går till catch.
+                    {
+                        int menuChoice = Convert.ToInt32(Console.ReadLine());
+                        switch (menuChoice)
+                        {
+                            case 1:
+                                user.CheckBalance(index);
+                                break;
+                            case 2:
+                                user.Transfer(index);
+                                break;
+                            case 3:
+                                user.Withdraw(index);
+                                break;
+                            case 4:
+                                user.Deposit(index);
+                                break;
+                            case 5:
+                                user.Farewell();
+                                approved = false;
+                                break;
+                            default:
+                                Console.WriteLine("Ange tal mellan 1 till 5.");
+                                Console.ReadKey();
+                                break;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("ERROR!!! Ange ett tal.");
+                        Console.ReadKey();
+                    }
+                }
+            }
         }
         public void CheckBalance(int index)         // Metod för att visa saldo.
         {
@@ -122,7 +127,7 @@ namespace Bankomat
             if (XisNotValid(y, index) == true)
                 return;
             Console.Write("Summa: ");
-            decimal money = Convert.ToDecimal(Console.ReadLine());
+            decimal money = Convert.ToDecimal(Console.ReadLine(), CultureInfo.InvariantCulture);
             if (BalanceIsTooHigh(index, money, x))
                 return;
             else
@@ -146,8 +151,9 @@ namespace Bankomat
             if (XisNotValid(x, index) == true)
                 return;
             Console.Write("Mata in summan: ");
-            decimal money = Convert.ToDecimal(Console.ReadLine());
-            bool approved = CheckPass(index);       // kontrollerar pinkod. // Om pinkod stämmer kan användaren ta ut pengar.
+            decimal money = Convert.ToDecimal(Console.ReadLine(), CultureInfo.InvariantCulture);
+            LogIn user = new LogIn();
+            bool approved = user.CheckPass(index);       // kontrollerar pinkod. // Om pinkod stämmer kan användaren ta ut pengar.
             while (approved)
             {                      
                 if (BalanceIsTooHigh(index, money, x))
@@ -172,8 +178,9 @@ namespace Bankomat
             if (XisNotValid(x, index) == true)
                 return;
             Console.Write("Mata in summan: ");
-            decimal money = Convert.ToDecimal(Console.ReadLine());
-            bool approved = CheckPass(index);       // Kontrollerar pin-kod för att kunna förtsätta.
+            decimal money = Convert.ToDecimal(Console.ReadLine(), CultureInfo.InvariantCulture);
+            LogIn user = new LogIn();
+            bool approved = user.CheckPass(index);       // Kontrollerar pin-kod för att kunna förtsätta.
             while (approved)                        // Om pinkod stämmer kan användaren sätta in pengar.
             {
                 Balance[index][x - 1] += money;     // Addera summan till x-1 konto.
