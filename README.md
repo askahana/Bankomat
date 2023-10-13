@@ -39,7 +39,7 @@ And then,
 
 ![Challenge1](https://github.com/askahana/Bankomat/assets/144675449/2aa53281-3c16-49a8-9da0-d7176e36f60f)
 
-In this way, you can store users' information in List. But I did not know how to handle Jagged Array. So I stored all information as the picture below. At first all information was stored under each method. But I initialized Arrays under class fields to avoid repetition like below. 
+In this way, you can store users' information in List. But I did not know how to handle Jagged Array. So I stored all information as below. At first all information was stored under each method, but I initialized Arrays under class fields to avoid repetition, 
 ![array](https://github.com/askahana/Bankomat/assets/144675449/3d6dfae5-fe6f-474f-a959-09c8b228f1c5)
 
 I used Array and not ArrayList becuase the number of users is fixed as 5. And as I mentioned above, jagged array was used to store balance so that each user can have different numbers of accounts although I first used ArrayList because I misunderstood that users needed to be able to transfer money to each other.
