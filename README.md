@@ -33,7 +33,7 @@ In this way you can know which index number each user has and it works with pass
 Where and how to store users’ information was the part which I needed to think about most. If I should use Array or ListArray, if I should store information in Main()-method or in each method/function, and I made several tries. 
 
 The first idea was to make a class for the log-in System.
-![ClassProperty](https://github.com/askahana/Bankomat/assets/144675449/554551f6-b276-4f3a-a772-d931ebf1e1fd)
+![account](https://github.com/askahana/Bankomat/assets/144675449/e44f29a8-1fd1-4ec5-9a46-0f0522e7200e)
 
 And then you can use them like this.
 
