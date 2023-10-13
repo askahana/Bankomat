@@ -60,7 +60,7 @@ Here are some points I would like to change next time.
 
 After making the project and trying to do extra tasks, I noticed I should have used ListArray to be able to register more accounts and transfer money to each other, or I should have used Array.Resize to make Array bigger. But I did not know how to handle Jaggaed Array in those cases. So I need to deepen my knowledge about this. 
 
-Also I am wondering if I should have declare/ initialize user's information in the constructor or in the field as I did. So next time, I would like to make project as my first plan, using constructors and try extra tasks.
+Also I am wondering if I should have declare/ initialize user's information in the field or in the constructor as I did. Next time, I would like to try as my first plan and try extra tasks.
 
 ### Authour
 * Asuka Hanada
