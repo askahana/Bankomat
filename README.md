@@ -39,8 +39,8 @@ And then,
 
 ![Challenge1](https://github.com/askahana/Bankomat/assets/144675449/2aa53281-3c16-49a8-9da0-d7176e36f60f)
 
-In this way, you can store users' information in List. But I did not know how to handle Jagged Array. So I stored all information as the picture below. At first all information was stored under each method. But I initialized Arrays under class fields to avoid repetition like below. 
-![array](https://github.com/askahana/Bankomat/assets/144675449/3d6dfae5-fe6f-474f-a959-09c8b228f1c5)
+In this way, you can store users' information in List. But I did not know how to handle Jagged Array. So I stored all information as below. At first all information was stored under each method, but I initialized Arrays in constructor to avoid repeted code.
+![constructor](https://github.com/askahana/Bankomat/assets/144675449/bac3ad96-293d-4931-8790-8d5f926cc388)
 
 I used Array and not ArrayList becuase the number of users is fixed as 5. And as I mentioned above, jagged array was used to store balance so that each user can have different numbers of accounts although I first used ArrayList because I misunderstood that users needed to be able to transfer money to each other.
 
@@ -60,7 +60,7 @@ Here are some points I would like to change next time.
 
 After making the project and trying to do extra tasks, I noticed I should have used ListArray to be able to register more accounts and transfer money to each other, or I should have used Array.Resize to make Array bigger. But I did not know how to handle Jaggaed Array in those cases. So I need to deepen my knowledge about this. 
 
-Also I am wondering if I should have declare/ initialize user's information in the constructor or in the field as I did. So next time, I would like to make project as my first plan, using constructors and try extra tasks.
+Also I am wondering if I should have declare/ initialize user's information in the field or in the constructor as I did. Next time, I would like to try as my first plan and try extra tasks.
 
 ### Authour
 * Asuka Hanada
