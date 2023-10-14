@@ -8,8 +8,13 @@ namespace Bankomat
 {
     internal class LogIn
     {
-        private string[] UserNames = { "AYA", "AKI", "TOBIAS", "MUSSEPIG", "OLLE" };
-        private int[] PassWords = { 1103, 1221, 1234, 3456, 0901 };
+        private string[] UserNames;
+        private int[] PassWords;
+        public LogIn()
+        {
+            UserNames = new string [5]{ "AYA", "AKI", "TOBIAS", "MUSSEPIG", "OLLE" };
+            PassWords = new int [5] { 1103, 1221, 1234, 3456, 0901 };
+        }
         public int CheckNameAndIndex()
         {
             int index = 0;                                  // För att kunna veta vilket index-nummer användare har.
