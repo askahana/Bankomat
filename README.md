@@ -30,7 +30,7 @@ In this way you can know which index number each user has and it works with pass
 
 ![CheckIndexAndName](https://github.com/askahana/Bankomat/assets/144675449/50f0c668-0acb-48cc-a517-702c7cd558e5)
 
-Where and how to store users’ information was the part which I needed to think about most. If I should use Array or ListArray, if I should store information in Main()-method or in each method/function, and I made several tries. 
+How and where to store users’ information was the part which I needed to think about most. If I should use Array or ListArray, if I should store information in Main()-method or in each method/function, and I made several tries. 
 
 The first idea was to make a class for the log-in System.
 ![account](https://github.com/askahana/Bankomat/assets/144675449/e44f29a8-1fd1-4ec5-9a46-0f0522e7200e)
@@ -39,13 +39,15 @@ And then,
 
 ![Challenge1](https://github.com/askahana/Bankomat/assets/144675449/2aa53281-3c16-49a8-9da0-d7176e36f60f)
 
-In this way, you can store users' information in List. But I did not know how to handle Jagged Array. So I stored all information as below. At first all information was stored under each method, but I initialized Arrays in constructor to avoid repeted code.
+In this way, you can store users' information in List. But I did not know how to handle Jagged Array, which I used to store users' balance. So I stored all information as below instead. At first all information was stored under each method, but I initialized Arrays in constructor to avoid repeted code.
 ![constructor](https://github.com/askahana/Bankomat/assets/144675449/bac3ad96-293d-4931-8790-8d5f926cc388)
 
-I used Array and not ArrayList becuase the number of users is fixed as 5. And as I mentioned above, jagged array was used to store balance so that each user can have different numbers of accounts although I first used ArrayList because I misunderstood that users needed to be able to transfer money to each other.
+I used Array and not ArrayList to store all users' information, becuase the number of users is fixed as 5. And as I mentioned above, jagged array was used to store balance so that each user can have different numbers of accounts. But when I tried to do extra tasks, I noticed I should have used ArrayList to make new account or transfer money to each other. So I needed to change it to List. I wondered if I could store ArrayList in ArrayList.
+![List](https://github.com/askahana/Bankomat/assets/144675449/59b54c07-7737-4c2f-933f-ae612c103b96)
 
-Also I had not understood variable "decimal" correctly and could not transfer or widthdraw decimalnumbers, "Öre". Say I want to withdraw 100.10 kr and if I type 100.10, it is not recognized as a number and all I get is the error message.
-To be able to solve this, I added "CultureInfo.InvariantCulture". 
+I managed to store ArrayList in ArrayList.
+
+One more thing I had prooblems with is variabel "decimal" as I had not understood it correctly and could not transfer or widthdraw decimalnumbers, "Öre". Say the user wants to withdraw 100.10 kr and type 100.10, it is not recognized as a number and all I get is the error message. To be able to solve this, I added "CultureInfo.InvariantCulture". 
 
 ![decimal](https://github.com/askahana/Bankomat/assets/144675449/186bbf14-f162-4915-be82-b677f9d5b96f)
 
@@ -53,14 +55,17 @@ Or I needed to use comma instead of period when to input the number. So programm
 
 
 ## Reflection
-Here are some points I would like to change next time.
+Here are some points I would like to try next time.
 
-- ArrayList instead Array
+- To make Array bigger
+- Less similar codes
 - Where to declare or initialize
 
-After making the project and trying to do extra tasks, I noticed I should have used ListArray to be able to register more accounts and transfer money to each other, or I should have used Array.Resize to make Array bigger. But I did not know how to handle Jaggaed Array in those cases. So I need to deepen my knowledge about this. 
+I used Array for all users' data at first but while making the project, I noticed I should use ArrayList for users' balance to be able to register more accounts and transfer money between users, or I should use Array.Resize to make Array bigger. This time I used ArrayList as I did not know how to make Jagged Array bigger but next time I would like to try Array.Resize to make Array bigger.
 
-Also I am wondering if I should have declare/ initialize user's information in the field or in the constructor as I did. Next time, I would like to try as my first plan and try extra tasks.
+Second, I have some similar codes where I could not find how to avoid them as they are similar but not exactly same. 
+
+Finally, I am wondering if I should have declared and/or initialized the user's information in the field or in the constructor as I did. 
 
 ### Authour
 * Asuka Hanada
